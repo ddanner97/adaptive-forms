@@ -1,0 +1,41 @@
+/**
+ * Token contract for @ddanner/adaptive-forms.
+ *
+ * The Tailwind preset reads ONLY these `--af-*` variables. Consuming apps map
+ * their own palette onto them (see README). Prefixing is deliberate: the two
+ * original consumers both define `--color-accent`, but it means a decorative
+ * tint in one app and the primary action color in the other. Reading unprefixed
+ * names would render plausible-looking wrong colors instead of failing loudly.
+ *
+ * Values below are last-resort fallbacks so an unmapped app still renders
+ * something legible. They are not a design system — override all of them.
+ */
+
+:root {
+  /* Surfaces */
+  --af-surface: #ffffff;
+  --af-input-bg: #ffffff;
+
+  /* Text */
+  --af-foreground: #171717;
+  --af-muted: #6b7280;
+  --af-placeholder: #9ca3af;
+
+  /* Primary action */
+  --af-primary: #2563eb;
+  --af-primary-foreground: #ffffff;
+
+  /* Lines and focus */
+  --af-border: #d1d5db;
+  --af-ring: #2563eb;
+
+  /* Validation. Error red is intentionally a token rather than hardcoded so
+     apps on a warm/sepia palette can desaturate it, but it defaults to a
+     conventional red because users expect errors to be red regardless of brand. */
+  --af-error: #dc2626;
+  --af-error-ring: #fca5a5;
+  --af-success: #15803d;
+
+  /* Geometry */
+  --af-radius: 0.75rem;
+}
