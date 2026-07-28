@@ -1,4 +1,4 @@
-# @ddanner97/ui
+# @ddanner97/adaptive-forms
 
 Config-driven multi-step form engine and UI primitives for React 19 + Next.js.
 
@@ -36,7 +36,7 @@ Not on npm yet — install straight from GitHub, pinned to a tag:
 npm install github:ddanner97/adaptive-forms#v0.1.0
 ```
 
-The package name stays `@ddanner97/ui`, so imports are unaffected by where it
+The package name stays `@ddanner97/adaptive-forms`, so imports are unaffected by where it
 came from. Pin to a tag rather than tracking the default branch: without a tag,
 `npm install` resolves to whatever `main` points at, and a fresh lockfile can
 pick up unreleased changes.
@@ -50,7 +50,7 @@ survive intact rather than being stripped or misplaced by a bundler. Add it to
 ```ts
 // next.config.ts
 const nextConfig: NextConfig = {
-  transpilePackages: ["@ddanner97/ui"],
+  transpilePackages: ["@ddanner97/adaptive-forms"],
 };
 ```
 
@@ -61,10 +61,10 @@ once, in your global stylesheet:
 
 ```css
 @import "tailwindcss";
-@import "@ddanner97/ui/tokens.css";
+@import "@ddanner97/adaptive-forms/tokens.css";
 
 /* Let Tailwind scan the package's class names. */
-@source "../node_modules/@ddanner97/ui/src";
+@source "../node_modules/@ddanner97/adaptive-forms/src";
 
 :root {
   --af-surface: var(--color-surface);
@@ -106,8 +106,8 @@ A config plus a registry is all a form needs.
 ```tsx
 "use client";
 
-import { AdaptiveForm } from "@ddanner97/ui/forms";
-import { tailwindFieldRegistry } from "@ddanner97/ui/fields";
+import { AdaptiveForm } from "@ddanner97/adaptive-forms/forms";
+import { tailwindFieldRegistry } from "@ddanner97/adaptive-forms/fields";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
@@ -153,8 +153,8 @@ The registry is the extension seam. Anything that talks to your API — username
 availability, geocoded location, an upload widget — lives in your app:
 
 ```tsx
-import { tailwindFieldRegistry } from "@ddanner97/ui/fields";
-import type { FieldRegistry } from "@ddanner97/ui/forms";
+import { tailwindFieldRegistry } from "@ddanner97/adaptive-forms/fields";
+import type { FieldRegistry } from "@ddanner97/adaptive-forms/forms";
 
 const registry: FieldRegistry = {
   ...tailwindFieldRegistry,
@@ -183,11 +183,11 @@ gating, submit routing, no markup. `SteppedFormView` is just one consumer of it.
 
 | Import | Contains |
 | --- | --- |
-| `@ddanner97/ui/forms` | `AdaptiveForm`, `FullForm`, `useSteppedForm`, `getVisibleFieldError`, types |
-| `@ddanner97/ui/fields` | Tailwind field components, `tailwindFieldRegistry`, shared class strings |
-| `@ddanner97/ui/dialogs` | `ModalDialog`, `BottomSheetDialog`, `useNativeDialogSync` |
-| `@ddanner97/ui/hooks` | `useBreakpoint` |
-| `@ddanner97/ui/tokens.css` | Token defaults |
+| `@ddanner97/adaptive-forms/forms` | `AdaptiveForm`, `FullForm`, `useSteppedForm`, `getVisibleFieldError`, types |
+| `@ddanner97/adaptive-forms/fields` | Tailwind field components, `tailwindFieldRegistry`, shared class strings |
+| `@ddanner97/adaptive-forms/dialogs` | `ModalDialog`, `BottomSheetDialog`, `useNativeDialogSync` |
+| `@ddanner97/adaptive-forms/hooks` | `useBreakpoint` |
+| `@ddanner97/adaptive-forms/tokens.css` | Token defaults |
 
 ## License
 

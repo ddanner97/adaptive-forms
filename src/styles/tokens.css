@@ -1,5 +1,5 @@
 /**
- * Token contract for @ddanner97/ui.
+ * Token contract for @ddanner97/adaptive-forms.
  *
  * The Tailwind preset reads ONLY these `--af-*` variables. Consuming apps map
  * their own palette onto them (see README). Prefixing is deliberate: the two

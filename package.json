@@ -1,5 +1,5 @@
 {
-  "name": "@ddanner97/ui",
+  "name": "@ddanner97/adaptive-forms",
   "version": "0.1.0",
   "description": "Config-driven multi-step form engine and UI primitives for React. Headless core, optional Tailwind preset.",
   "license": "MIT",
