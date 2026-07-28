@@ -69,8 +69,18 @@ once, in your global stylesheet:
   --af-primary-foreground: #ffffff;
   --af-border: var(--color-border);
   --af-ring: var(--color-accent);
+  /* Optional: point at your heading face so stepped titles match your other
+     headings. Defaults to `inherit` (your body font) if you skip it. */
+  --af-font-display: var(--font-fraunces);
 }
 ```
+
+Map these in **every scope that re-pins the tokens they reference**, not just
+`:root`. Custom properties inherit as *computed* values, so `--af-foreground:
+var(--foreground)` resolved at `:root` freezes there — if a descendant class
+re-pins `--foreground` (e.g. a `.force-light` wrapper that keeps auth screens
+light in OS dark mode), the alias will not follow it and the library will render
+the wrong colour. Use a selector list: `:root, .force-light { … }`.
 
 Two deliberate choices here. The prefix exists because token names collide in
 practice — `--color-accent` is a decorative tint in one real consuming app and

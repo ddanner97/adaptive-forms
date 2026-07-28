@@ -1,5 +1,5 @@
 /**
- * Token contract for @ddanner/adaptive-forms.
+ * Token contract for @ddanner97/ui.
  *
  * The Tailwind preset reads ONLY these `--af-*` variables. Consuming apps map
  * their own palette onto them (see README). Prefixing is deliberate: the two
@@ -38,4 +38,10 @@
 
   /* Geometry */
   --af-radius: 0.75rem;
+
+  /* Font used for step titles. Defaults to `inherit` so an app that does not
+     map it simply keeps its body font — apps with a display/serif face for
+     headings should point this at it so stepped titles match their other
+     headings rather than silently falling back to the body font. */
+  --af-font-display: inherit;
 }

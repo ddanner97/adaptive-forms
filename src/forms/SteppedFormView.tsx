@@ -9,10 +9,10 @@ import {
 } from "../fields/styles";
 import { FormField } from "./FormField";
 import { useSteppedForm } from "./useSteppedForm";
-import type { FieldRegistry, FormConfig, FormValues } from "./types";
+import type { FieldRegistry, FormLayout, FormValues } from "./types";
 
 interface SteppedFormViewProps {
-  config: FormConfig;
+  config: FormLayout;
   registry: FieldRegistry;
   form: UseFormReturn<FormValues>;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -66,7 +66,7 @@ export const SteppedFormView = ({
       ) : null}
 
       {step.title ? (
-        <h2 className="text-center text-2xl font-semibold text-[var(--af-foreground)]">
+        <h2 className="text-center font-[family-name:var(--af-font-display)] text-2xl font-semibold text-[var(--af-foreground)]">
           {step.title}
         </h2>
       ) : null}

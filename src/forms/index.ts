@@ -14,6 +14,7 @@ export type {
   FieldRenderer,
   FieldRendererProps,
   FormConfig,
+  FormLayout,
   FormProps,
   FormStep,
   FormSubmitHelpers,

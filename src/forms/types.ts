@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { Resolver, UseFormReturn } from "react-hook-form";
+import type { FieldValues, Resolver, UseFormReturn } from "react-hook-form";
 
 /** The form values shape the engine operates on. Field configs are dynamic, so
  * values stay an open record and renderers narrow their own field's type. */
@@ -58,28 +58,39 @@ export interface FormStep {
   fieldNames: string[];
 }
 
-export interface FormConfig {
+/**
+ * What a view needs to render: fields and step grouping, no validation.
+ *
+ * Kept separate from FormConfig because `Resolver<T>` is contravariant in T, so
+ * a `FormConfig<RegisterData>` is not assignable to `FormConfig<FieldValues>`.
+ * Views never touch the resolver, so taking the layout alone sidesteps the
+ * variance problem entirely instead of pushing casts onto consumers.
+ */
+export interface FormLayout {
   fields: AnyFieldConfig[];
+  steps?: FormStep[];
+}
+
+export interface FormConfig<TValues extends FieldValues = FieldValues>
+  extends FormLayout {
   /**
    * A react-hook-form resolver. The library takes a resolver rather than a
    * schema so it stays neutral across zod/valibot/yup and carries no validation
    * dependency of its own. For zod: `resolver: zodResolver(mySchema)`.
    */
-  resolver: Resolver<FormValues>;
-  steps?: FormStep[];
+  resolver: Resolver<TValues>;
 }
 
 export interface FormSubmitHelpers {
   reset: () => void;
 }
 
-export interface FormProps {
-  config: FormConfig;
+export interface FormProps<TValues extends FieldValues = FieldValues> {
+  config: FormConfig<TValues>;
   registry: FieldRegistry;
-  onSubmit: (
-    data: FormValues,
-    helpers: FormSubmitHelpers,
-  ) => void | Promise<void>;
+  /** `data` is typed by the resolver, so `FormConfig<RegisterData>` yields a
+   * typed submit handler with no cast at the call site. */
+  onSubmit: (data: TValues, helpers: FormSubmitHelpers) => void | Promise<void>;
   submitLabel?: string;
   submittingLabel?: string;
   isSubmitting?: boolean;

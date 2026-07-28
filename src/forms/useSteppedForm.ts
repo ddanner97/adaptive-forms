@@ -3,10 +3,10 @@
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import type { UseFormReturn } from "react-hook-form";
-import type { FormConfig, FormValues } from "./types";
+import type { FormLayout, FormValues } from "./types";
 
 interface UseSteppedFormInput {
-  config: FormConfig;
+  config: FormLayout;
   form: UseFormReturn<FormValues>;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   onStepChange?: (current: number, total: number) => void;

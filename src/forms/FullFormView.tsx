@@ -5,10 +5,10 @@ import type { ReactNode } from "react";
 import { useFormState, type UseFormReturn } from "react-hook-form";
 import { primaryButtonClassName } from "../fields/styles";
 import { FormField } from "./FormField";
-import type { FieldRegistry, FormConfig, FormValues } from "./types";
+import type { FieldRegistry, FormLayout, FormValues } from "./types";
 
 interface FullFormViewProps {
-  config: FormConfig;
+  config: FormLayout;
   registry: FieldRegistry;
   form: UseFormReturn<FormValues>;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
