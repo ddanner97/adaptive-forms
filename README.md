@@ -38,7 +38,7 @@ are elsewhere, and they're baked in here:
 Not on npm yet — install straight from GitHub, pinned to a tag:
 
 ```bash
-npm install github:ddanner97/adaptive-forms#v0.1.0
+npm install github:ddanner97/adaptive-forms#v0.1.1
 ```
 
 The package name stays `@ddanner97/adaptive-forms`, so imports are unaffected by where it
@@ -88,7 +88,7 @@ once, in your global stylesheet:
 ```
 
 Map these in **every scope that re-pins the tokens they reference**, not just
-`:root`. Custom properties inherit as *computed* values, so `--af-foreground:
+`:root`. Custom properties inherit as _computed_ values, so `--af-foreground:
 var(--foreground)` resolved at `:root` freezes there — if a descendant class
 re-pins `--foreground` (e.g. a `.force-light` wrapper that keeps auth screens
 light in OS dark mode), the alias will not follow it and the library will render
@@ -116,18 +116,22 @@ import { tailwindFieldRegistry } from "@ddanner97/adaptive-forms/fields";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
-const schema = z
-  .object({
-    name: z.string().min(1, "Name is required"),
-    email: z.email("Enter a valid email"),
-    password: z.string().min(8, "Password must be at least 8 characters"),
-  });
+const schema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.email("Enter a valid email"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+});
 
 const config = {
   resolver: zodResolver(schema),
   fields: [
     { name: "name", label: "Name", kind: "text", autoComplete: "name" },
-    { name: "email", label: "Email", kind: "email", autoComplete: "email" },
+    {
+      name: "email",
+      label: "Email",
+      kind: "email",
+      autoComplete: "email",
+    },
     { name: "password", label: "Password", kind: "password" },
   ],
   steps: [
@@ -141,7 +145,9 @@ export const SignUpForm = () => (
   <AdaptiveForm
     config={config}
     registry={tailwindFieldRegistry}
-    onSubmit={async (data) => { /* ... */ }}
+    onSubmit={async (data) => {
+      /* ... */
+    }}
     submitLabel="Create account"
   />
 );
@@ -172,7 +178,7 @@ const registry: FieldRegistry = {
 ```
 
 A `FieldDefinition` is an object rather than a bare function so a kind can
-declare behavior core needs *before* rendering — currently
+declare behavior core needs _before_ rendering — currently
 `hideErrorWhenEmpty`. An unregistered kind throws with the list of registered
 kinds rather than silently rendering nothing.
 
@@ -186,13 +192,13 @@ gating, submit routing, no markup. `SteppedFormView` is just one consumer of it.
 
 ## Subpath exports
 
-| Import | Contains |
-| --- | --- |
-| `@ddanner97/adaptive-forms/forms` | `AdaptiveForm`, `FullForm`, `useSteppedForm`, `getVisibleFieldError`, types |
-| `@ddanner97/adaptive-forms/fields` | Tailwind field components, `tailwindFieldRegistry`, shared class strings |
-| `@ddanner97/adaptive-forms/dialogs` | `ModalDialog`, `BottomSheetDialog`, `useNativeDialogSync` |
-| `@ddanner97/adaptive-forms/hooks` | `useBreakpoint` |
-| `@ddanner97/adaptive-forms/tokens.css` | Token defaults |
+| Import                                 | Contains                                                                    |
+| -------------------------------------- | --------------------------------------------------------------------------- |
+| `@ddanner97/adaptive-forms/forms`      | `AdaptiveForm`, `FullForm`, `useSteppedForm`, `getVisibleFieldError`, types |
+| `@ddanner97/adaptive-forms/fields`     | Tailwind field components, `tailwindFieldRegistry`, shared class strings    |
+| `@ddanner97/adaptive-forms/dialogs`    | `ModalDialog`, `BottomSheetDialog`, `useNativeDialogSync`                   |
+| `@ddanner97/adaptive-forms/hooks`      | `useBreakpoint`                                                             |
+| `@ddanner97/adaptive-forms/tokens.css` | Token defaults                                                              |
 
 ## License
 
