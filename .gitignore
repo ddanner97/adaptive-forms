@@ -1,0 +1,5 @@
+# Unrooted so it also covers any nested package directories.
+node_modules/
+dist/
+*.tgz
+.DS_Store

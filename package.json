@@ -1,8 +1,26 @@
 {
   "name": "@ddanner97/ui",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Config-driven multi-step form engine and UI primitives for React. Headless core, optional Tailwind preset.",
   "license": "MIT",
+  "author": "Damian Danner",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ddanner97/adaptive-forms.git"
+  },
+  "homepage": "https://github.com/ddanner97/adaptive-forms#readme",
+  "bugs": {
+    "url": "https://github.com/ddanner97/adaptive-forms/issues"
+  },
+  "keywords": [
+    "react",
+    "form",
+    "multi-step",
+    "wizard",
+    "react-hook-form",
+    "tailwind",
+    "headless"
+  ],
   "sideEffects": [
     "*.css"
   ],
@@ -17,6 +35,13 @@
   "files": [
     "src"
   ],
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "react": "^19",
     "react-dom": "^19",
@@ -28,6 +53,7 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-hook-form": "^7.81.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^3.2.7"
   }
 }

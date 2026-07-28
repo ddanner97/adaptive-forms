@@ -30,9 +30,16 @@ are elsewhere, and they're baked in here:
 
 ## Install
 
+Not on npm yet — install straight from GitHub, pinned to a tag:
+
 ```bash
-npm install @ddanner97/ui
+npm install github:ddanner97/adaptive-forms#v0.1.0
 ```
+
+The package name stays `@ddanner97/ui`, so imports are unaffected by where it
+came from. Pin to a tag rather than tracking the default branch: without a tag,
+`npm install` resolves to whatever `main` points at, and a fresh lockfile can
+pick up unreleased changes.
 
 Peer dependencies: `react` 19, `react-dom` 19, `react-hook-form` 7.
 
