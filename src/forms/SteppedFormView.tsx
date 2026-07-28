@@ -40,7 +40,13 @@ export const SteppedFormView = ({
   onStepChange,
   submitIcon,
 }: SteppedFormViewProps) => {
-  const { isValidating } = useFormState({ control: form.control });
+  // Combine the caller's flag with react-hook-form's own submission state, so
+  // an async onSubmit is locked against double-submit even when the consumer
+  // forgets to thread `isSubmitting` back in.
+  const { isValidating, isSubmitting: isFormSubmitting } = useFormState({
+    control: form.control,
+  });
+  const busy = isSubmitting || isFormSubmitting;
   const {
     currentStep,
     totalSteps,
@@ -83,10 +89,10 @@ export const SteppedFormView = ({
       <div className="flex flex-col gap-3">
         <button
           type="submit"
-          disabled={isSubmitting || isValidating}
+          disabled={busy || isValidating}
           className={primaryButtonClassName}
         >
-          {isLastStep ? (isSubmitting ? submittingLabel : submitLabel) : nextLabel}
+          {isLastStep ? (busy ? submittingLabel : submitLabel) : nextLabel}
           {submitIcon}
         </button>
 

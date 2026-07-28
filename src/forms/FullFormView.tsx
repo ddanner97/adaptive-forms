@@ -29,7 +29,13 @@ export const FullFormView = ({
   isSubmitting = false,
   submitIcon,
 }: FullFormViewProps) => {
-  const { isValidating } = useFormState({ control: form.control });
+  // Combine the caller's flag with react-hook-form's own submission state, so
+  // an async onSubmit is locked against double-submit even when the consumer
+  // forgets to thread `isSubmitting` back in.
+  const { isValidating, isSubmitting: isFormSubmitting } = useFormState({
+    control: form.control,
+  });
+  const busy = isSubmitting || isFormSubmitting;
 
   return (
     <form onSubmit={onSubmit} className="space-y-4">
@@ -44,10 +50,10 @@ export const FullFormView = ({
 
       <button
         type="submit"
-        disabled={isSubmitting || isValidating}
+        disabled={busy || isValidating}
         className={primaryButtonClassName}
       >
-        {isSubmitting ? submittingLabel : submitLabel}
+        {busy ? submittingLabel : submitLabel}
         {submitIcon}
       </button>
     </form>

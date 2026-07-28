@@ -33,9 +33,12 @@ export const tailwindFieldRegistry: FieldRegistry = {
     render: (props) => <TextField {...commonProps(props)} type="email" />,
   },
   password: {
-    // Suppress "required" on an empty password even after a submit attempt —
-    // see errorVisibility.ts for why isSubmitted alone produces bad UX here.
-    hideErrorWhenEmpty: true,
+    // Deliberately does NOT set hideErrorWhenEmpty. It was on by default here
+    // and made a required password look broken: the form refused to advance
+    // with nothing shown, and the input reported aria-invalid="false" while
+    // invalid. The ordinary touched/dirty rules already keep errors off an
+    // untouched field, so the flag bought nothing and cost correctness.
+    // It remains available per-field for genuinely optional secrets.
     render: (props) => <PasswordField {...commonProps(props)} />,
   },
   textarea: {

@@ -17,14 +17,19 @@ are elsewhere, and they're baked in here:
   natively — running full-schema validation against still-unmounted later-step
   fields, failing, and permanently latching react-hook-form's `isSubmitted`.
   Every step renders a real submit button and routes through one handler.
-- **`isSubmitted` never resets.** Once a user attempts submit, a stale
-  "Password is required" stays pinned to the password field forever — including
-  right after they deliberately clear it to retype. `hideErrorWhenEmpty` fixes
-  that class of field.
 - **Errors on untouched fields.** A user still typing into field one shouldn't
   see "required" screaming from field four. Errors surface on touch, dirty, or
   submit — see `errorVisibility.ts`, which is pure and unit-tested against the
   original implementation as an oracle.
+- **Silent dead buttons.** A validation rule that hides an error on an empty
+  field makes a required step refuse to advance with nothing shown, and reports
+  `aria-invalid="false"` on an invalid input. `hideErrorWhenEmpty` exists for
+  genuinely optional secrets and is deliberately off for the built-in
+  `password` kind; there are integration tests pinning both the intermediate
+  step and final submit paths.
+- **Double submits.** Both views disable the submit control on react-hook-form's
+  own `formState.isSubmitting` as well as the `isSubmitting` prop, so an async
+  handler is locked even if the consumer never threads the prop back in.
 - **Nested dialogs fight over body scroll.** `useNativeDialogSync` ref-counts
   the lock and restores scroll position.
 

@@ -1,6 +1,6 @@
 {
   "name": "@ddanner97/adaptive-forms",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Config-driven multi-step form engine and UI primitives for React. Headless core, optional Tailwind preset.",
   "license": "MIT",
   "author": "Damian Danner",
@@ -33,7 +33,10 @@
     "./tokens.css": "./src/styles/tokens.css"
   },
   "files": [
-    "src"
+    "src",
+    "!src/**/*.test.ts",
+    "!src/**/*.test.tsx",
+    "!src/test"
   ],
   "scripts": {
     "test": "vitest run",
@@ -48,8 +51,11 @@
     "react-hook-form": "^7"
   },
   "devDependencies": {
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "jsdom": "^27.0.1",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-hook-form": "^7.81.0",
